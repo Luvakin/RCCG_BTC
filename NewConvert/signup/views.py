@@ -8,13 +8,9 @@ def signup(request):
 def convert(request):
     if request.method == "POST":
         Fullname = request.POST["fullname"]
-        Email = request.POST["email"]
+        Email = request.POST.get("email")
         Phone = request.POST["phone_number"]
         Address = request.POST["address"]
         Prayer = request.POST["prayer"]
-        print(Fullname)
-        print(Email)
-        print(Phone)
-        print(Address)
-        print(Prayer)
+        
     return render (request, "signup/convert.html", context = {})
