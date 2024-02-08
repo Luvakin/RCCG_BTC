@@ -1,5 +1,4 @@
 {% load static %}
-
 <!DOCTYPE html>
 
 <html
@@ -15,8 +14,23 @@
     <meta name="description" content="" />
 
     <!-- Favicon -->
-    {% include "core/css.html" %}
+    <link rel="icon" type="image/x-icon" href="{% static "assets/logo.png" %}" />
 
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+      rel="stylesheet" />
+
+    <link rel="stylesheet" href="{% static "assets/vendor/fonts/boxicons.css" %}" />
+    <link rel="stylesheet" href="{% static "assets/vendor/css/core.css" %}" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="{% static "assets/vendor/css/theme-default.css" %}" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="{% static "assets/css/demo.css" %}" />
+    <link rel="stylesheet" href="{% static "assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" %}" />
+    <script src="{% static "assets/vendor/js/helpers.js" %}"></script>
+    
+    <script src="{% static "assets/js/config.js" %}"></script>
   </head>
 
   <body>
@@ -50,7 +64,7 @@
               <!-- /Search -->
 
               <ul class="navbar-nav flex-row align-items-center ms-auto">
-                <!-- Place this tag where you want the button to render. -->
+               
 
                 <!-- User -->
                 <li class="nav-item navbar-dropdown dropdown-user dropdown">
@@ -110,68 +124,73 @@
                 <div class="col-md-12">
                   <ul class="nav nav-pills flex-column flex-md-row mb-3">
                     <li class="nav-item">
-                      <a class="nav-link active" href="javascript:void(0);"><i class="bx bx-user me-1"></i> Account</a>
+                      <a class="nav-link" href="{% url "core:profile" %}"><i class="bx bx-user me-1"></i> Account</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="{% url "core:manageadmin" %}"
+                      <a class="nav-link active" href="javascript:void(0);"
                         ><i class="bx bx-collection me-1"></i> Manage Admin</a
                       >
                     </li>
                   </ul>
               <div class="col-md-12">
-              <h6 class="mt-2 text-muted">My Profile</h6>
-              <div class="card mb-4">
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item">Username: Cook</li>
-                  
-                </ul>
+              <h6 class="mt-2 text-muted">Delete Admin</h6>
+              
               </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="card mb-4">
-                    <h5 class="card-header">Add Admin</h5>
-                    <!-- Account -->
-                    <div class="card-body">
-                    </div>
-                    <hr class="my-0" />
-                    <div class="card-body">
-                      <form id="formAccountSettings" method="POST" action="profile.html">
-                        <div class="row">
-
-                            <div class="mb-3 col-md-12">
-                                <label for="usrname" class="form-label">Username</label>
-                                <input
-                                  class="form-control"
-                                  type="text"
-                                  id="usrname"
-                                  name="usrname"
-                                  required
-                                  placeholder="Username"
-                                  autofocus />
+              <div class="card">
+                <h5 class="card-header">Admin</h5>
+                <div class="card-body">
+                  <div class="table-responsive text-nowrap">
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th>Username</th>
+                          <th>Action</th>
+                          
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>
+                            <i class="fab fa-angular fa-lg text-danger me-3"></i>
+                            <span class="fw-medium">Cook</span>
+                          </td>
+                          <td>
+                            <div class="dropdown">
+                              <button
+                                type="button"
+                                class="btn p-0 dropdown-toggle hide-arrow"
+                                data-bs-toggle="dropdown">
+                                <i class="bx bx-dots-vertical-rounded"></i>
+                              </button>
+                              <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#"
+                                  ><i class="bx bx-trash me-1"></i> Delete</a
+                                >
                               </div>
-
-                            <div class="mb-3 col-md-12">
-                                <label for="adminpassword" class="form-label">Old Password</label>
-                                <input type="password" class="form-control" id="adminpassword" name="adminpassword" placeholder="Password" required/>
                             </div>
-                        </div>
-                        <div class="mt-2">
-                          <button type="submit" class="btn btn-primary me-2">Save changes</button>
-                          <button type="reset" class="btn btn-outline-secondary">Cancel</button>
-                        </div>
-                      </form>
-                    </div>
-                    <!-- /Account -->
+                          </td>
+                        </tr>
+                        
+                      </tbody>
+                    </table>
                   </div>
-                  
                 </div>
               </div>
-            </div>
-            <!-- / Content -->
+              <!--/ Bordered Table -->
    
 
-        {% include "core/scripts.html" %}
+    
 
+
+    <script src="{% static "assets/vendor/libs/jquery/jquery.js"%}"></script>
+    <script src="{% static "assets/vendor/libs/popper/popper.js"%}"></script>
+    <script src="{% static "assets/vendor/js/bootstrap.js"%}"></script>
+    <script src="{% static "assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"%}"></script>
+    <script src="{% static "assets/vendor/js/menu.js"%}"></script>
+
+    
+    <!-- Main JS -->
+    <script src="{% static "assets/js/main.js"%}"></script>
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
   </body>
 </html>
