@@ -136,7 +136,8 @@
                     </div>
                     <hr class="my-0" />
                     <div class="card-body">
-                      <form id="formAccountSettings" method="POST" action="profile.html">
+                      <form id="formAccountSettings" method="POST" action=".">
+                        {% csrf_token %}
                         <div class="row">
 
                             <div class="mb-3 col-md-12">
@@ -144,8 +145,8 @@
                                 <input
                                   class="form-control"
                                   type="text"
-                                  id="usrname"
-                                  name="usrname"
+                                  id="username"
+                                  name="username"
                                   required
                                   placeholder="Username"
                                   autofocus />

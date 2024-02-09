@@ -149,10 +149,13 @@
               <form
                 id="formAuthentication"
                 class="mb-3"
-                action="{% url "core:dashboard" %}"
+                action="."
                 method="POST"
               >
               {% csrf_token %}
+              {% for message in messages %}
+                {{message}}  
+              {% endfor %}
                 <div class="mb-3">
                   <label for="username" class="form-label">Username</label>
                   <input
