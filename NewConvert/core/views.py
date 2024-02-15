@@ -5,6 +5,10 @@ from django.contrib.auth.models import User, auth
 from django.contrib.auth import authenticate, login,logout
 from django.contrib import messages
 from .forms import UserForm
+from django.contrib.auth.decorators import login_required
+from .models import Converts
+from datetime import datetime
+from django.conf import settings
 # Create your views here.
 
 def admin_login(request):
@@ -34,12 +38,33 @@ def admin_login(request):
 
 
     return render(request, "core/admin_login.html",{})
+
+# @login_required
 def dashboard(request):
+    print(request.user)
     return render(request, "core/dashboard.html", {})
 
+# @login_required
 def data_table(request):
-    return render (request, "core/datatable.html", {})
+    converts = Converts.objects.all()
+    day = datetime.now().day
+    month = datetime.now().month
+    if day < 10:
+        day = f"0{datetime.now().day}"
+    elif month < 10:
+        month = f"0{datetime.now().month}"
+    else:
+        day = datetime.now().day
+        month = datetime.now().month
 
+    year = datetime.now().year
+    return render (request, "core/datatable.html", {"converts" : converts,
+                                                    "day" : day,
+                                                    "month" : month,
+                                                    "year" : year                                                    
+                                                    })
+
+# @login_required
 def profile(request):
     if request.method == "POST":
         username = request.POST["username"]
@@ -52,6 +77,7 @@ def profile(request):
             return HttpResponseRedirect(reverse("core:profile"))
     return render (request, "core/profile.html", {})
 
+# @login_required
 def change_password(request):
     if request.method == "POST":
         oldpassword = request.POST["oldpassword"]
@@ -65,8 +91,10 @@ def change_password(request):
                return HttpResponseRedirect(reverse("core:dashboard")) 
     return render (request, "core/changepass.html", {})
 
+# @login_required
 def manageadmin(request):
     user = User.objects.filter(is_superuser = False)
     return render (request, "core/manageadmin.html", {"user" : user})
+
 def logout(request):
     pass    

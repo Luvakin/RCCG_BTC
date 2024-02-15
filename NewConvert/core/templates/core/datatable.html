@@ -74,16 +74,17 @@
                         </div>
                       </a>
                     </li>
-                    <li>
-                      <div class="dropdown-divider"></div>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="{% url "core:profile" %}">
-                        <i class="bx bx-user me-2"></i>
-                        <span class="align-middle">My Profile</span>
-                      </a>
-                    </li>
-                
+                    {% if user.is_superuser %}
+                      <li>
+                        <div class="dropdown-divider"></div>
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href="{% url "core:profile" %}">
+                          <i class="bx bx-user me-2"></i>
+                          <span class="align-middle">My Profile</span>
+                        </a>
+                      </li>
+                    {% endif %}
                     <li>
                       <div class="dropdown-divider"></div>
                     </li>
@@ -111,7 +112,7 @@
 
               <!-- Basic Bootstrap Table -->
               <div class="card">
-                <h5 class="card-header">03/02/2024 
+                <h5 class="card-header">{{day}}/{{month}}/{{year}} 
                 <div class="dropdown" style="padding-top: 30px;">
                   <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                     <i class="bx bx-download"></i>
@@ -138,19 +139,20 @@
                       </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
-                      <tr>
-                        <td>
-                          <i class="fab fa-angular fa-lg text-danger me-3"></i>
-                          <span class="fw-medium">Jane Doe</span>
-                        </td>
-                        <td>janedoe@gmail.com</td>
-                        <td>+110090085</td>
-                        <td>Jane Doe Annonymous Home</td>
-                        <td>Change My name, o Lord</td>
-                        
-                      </tr>
-                      
-                      <tr>
+                      {% for convert in converts %}
+                        <tr>
+                          <td>
+                            <i class="fab fa-angular fa-lg text-danger me-3"></i>
+                            <span class="fw-medium">{{convert.Fullname}}</span>
+                          </td>
+                          <td>{{convert.Email}}</td>
+                          <td>{{convert.Phone_number}}</td>
+                          <td>{{convert.Address}}</td>
+                          <td>{{convert.Prayer_point}}</td>
+                          
+                        </tr>
+                      {% endfor %}
+                      {% comment %} <tr>
                         <td>
                           <i class="fab fa-angular fa-lg text-danger me-3"></i>
                           <span class="fw-medium">Laja Junior</span>
@@ -160,7 +162,7 @@
                         <td>Somewhere in mowe</td>
                         <td>Help me king</td>
                         
-                      </tr>
+                      </tr> {% endcomment %}
 
                     </tbody>
                   </table>
@@ -171,7 +173,7 @@
               <div class="container-xxl flex-grow-1 container-p-y">
 
                 <div class="card">
-                  <h5 class="card-header">03/02/2024 
+                  <h5 class="card-header">{{day}}/{{month}}/{{year}} 
                   <div class="dropdown" style="padding-top: 30px;">
                     <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                       <i class="bx bx-download"></i>
@@ -198,29 +200,19 @@
                     </tr>
                   </thead>
                   <tbody class="table-border-bottom-0">
+                    {% for convert in converts %}
                     <tr>
                       <td>
                         <i class="fab fa-angular fa-lg text-danger me-3"></i>
-                        <span class="fw-medium">Jane Doe</span>
+                        <span class="fw-medium">{{convert.Fullname}}</span>
                       </td>
-                      <td>janedoe@gmail.com</td>
-                      <td>+2348110095085</td>
-                      <td>Jane Doe Annonymous Home</td>
-                      <td>Change My name, o Lord</td>
+                      <td>{{convert.Email}}</td>
+                      <td>{{convert.Phone_number}}</td>
+                      <td>{{convert.Address}}</td>
+                      <td>{{convert.Prayer_point}}</td>
                       
                     </tr>
-                    
-                    <tr>
-                      <td>
-                        <i class="fab fa-angular fa-lg text-danger me-3"></i>
-                        <span class="fw-medium">Cook</span>
-                      </td>
-                      <td>Albert Cook</td>
-                      <td>Albert Cook</td>
-                      <td>Albert Cook</td>
-                      <td>Albert Cook</td>
-                      
-                    </tr>
+                  {% endfor %}
 
                   </tbody>
                 </table>
