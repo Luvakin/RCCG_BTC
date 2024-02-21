@@ -89,7 +89,7 @@
                       <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="javascript:void(0);">
+                      <a class="dropdown-item" href="{% url "core:logout" %}">
                         <i class="bx bx-power-off me-2"></i>
                         <span class="align-middle">Log Out</span>
                       </a>
@@ -121,7 +121,7 @@
                     <a class="dropdown-item" href="javascript:void(0);"
                       ><i class="bx bx-download me-1"></i> Download</a
                     >
-                    <a class="dropdown-item" href="javascript:void(0);"
+                    <a class="dropdown-item" href="{% url "core:delete" %}"
                       ><i class="bx bx-trash me-1"></i> Delete</a
                     >
                   </div>
@@ -141,7 +141,7 @@
                     <tbody class="table-border-bottom-0">
                       {% for convert in converts %}
                         <tr>
-                          <td>
+                        <td>
                             <i class="fab fa-angular fa-lg text-danger me-3"></i>
                             <span class="fw-medium">{{convert.Fullname}}</span>
                           </td>
@@ -151,8 +151,12 @@
                           <td>{{convert.Prayer_point}}</td>
                           
                         </tr>
-                      {% endfor %}
-                      {% comment %} <tr>
+                        {% empty %}
+                        <tr>
+                          <td style = "text-align:center", colspan = "5"> <p> NO CONVERT ADDED YET!</p> </td>
+                        </tr> 
+                        {% endfor %}
+                        {% comment %} <tr>
                         <td>
                           <i class="fab fa-angular fa-lg text-danger me-3"></i>
                           <span class="fw-medium">Laja Junior</span>
@@ -174,16 +178,16 @@
 
                 <div class="card">
                   <h5 class="card-header">{{day}}/{{month}}/{{year}} 
-                  <div class="dropdown" style="padding-top: 30px;">
-                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                      <i class="bx bx-download"></i>
+                    <div class="dropdown" style="padding-top: 30px;">
+                      <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                        <i class="bx bx-download"></i>
                     </button>
                     <div class="dropdown-menu">
                       <a class="dropdown-item" href="javascript:void(0);"
                         ><i class="bx bx-download me-1"></i> Download</a
-                      >
-                      <a class="dropdown-item" href="javascript:void(0);"
-                        ><i class="bx bx-trash me-1"></i> Delete</a
+                        >
+                      <a class="dropdown-item" href="{% url "core:delete" %}"
+                      ><i class="bx bx-trash me-1"></i> Delete</a
                       >
                     </div>
                   </div>
@@ -212,7 +216,11 @@
                       <td>{{convert.Prayer_point}}</td>
                       
                     </tr>
-                  {% endfor %}
+                    {% empty %}
+                    <tr>
+                      <td style = "text-align:center", colspan = "5"> <p> NO CONVERT ADDED YET!</p> </td>
+                    </tr> 
+                    {% endfor %}
 
                   </tbody>
                 </table>

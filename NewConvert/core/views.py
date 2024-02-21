@@ -47,6 +47,7 @@ def dashboard(request):
 # @login_required
 def data_table(request):
     converts = Converts.objects.all()
+    lenConvert = len(converts)
     day = datetime.now().day
     month = datetime.now().month
     if day < 10:
@@ -61,7 +62,7 @@ def data_table(request):
     return render (request, "core/datatable.html", {"converts" : converts,
                                                     "day" : day,
                                                     "month" : month,
-                                                    "year" : year                                                    
+                                                    "year" : year
                                                     })
 
 # @login_required
@@ -96,5 +97,13 @@ def manageadmin(request):
     user = User.objects.filter(is_superuser = False)
     return render (request, "core/manageadmin.html", {"user" : user})
 
+def delete(request):
+    if len(Converts.objects.all()) != 0:
+        Converts.objects.all().delete()
+        return HttpResponseRedirect(reverse("core:data_table"))
+    else:
+        return HttpResponseRedirect(reverse("core:data_table"))
+
 def logout(request):
-    pass    
+    auth.logout(request)
+    return HttpResponseRedirect(reverse("core:admin_login"))
