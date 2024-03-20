@@ -84,7 +84,7 @@ def change_password(request):
         oldpassword = request.POST["oldpassword"]
         newpassword = request.POST["newpassword"]
         confirmpassword = request.POST["confirmpassword"]
-
+ 
         if request.user.check_password(oldpassword):
             if newpassword == confirmpassword:
                request.user.set_password(newpassword)
