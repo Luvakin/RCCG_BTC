@@ -7,10 +7,10 @@ from django.contrib import messages
 from .forms import UserForm
 from django.contrib.auth.decorators import login_required
 from .models import Converts
-from datetime import datetime
+from datetime import datetime, timedelta
 from django.http import HttpResponse
 from django.conf import settings
-
+from django.utils import timezone
 
 import csv
 
@@ -63,22 +63,28 @@ def dashboard(request):
 # @login_required
 def data_table(request):
     converts = Converts.objects.all()
+    coppe = 0
+    date_to_owner = {}
+    each_dates = []
+    dict_date = []
+    today = datetime.now().date()
+    print("*****************************\n")
+    print(f"General Date: {today} \n")
+    print("*****************************")
+    for i in range(0,len(converts)):
+        each_dates.append(converts[i].date)
+    date_set = list(set(each_dates))
+    date_set = sorted(date_set, reverse=True)
+    for i in range(0,len(converts)):
+        for j in range(0, len(date_set)):
+            coppe = list(Converts.objects.filter(date = date_set[j]))   
+            date_to_owner[date_set[j]] = coppe
+    print(date_set)
     lenConvert = len(converts)
-    day = datetime.now().day
-    month = datetime.now().month
-    if day < 10:
-        day = f"0{datetime.now().day}"
-    elif month < 10:
-        month = f"0{datetime.now().month}"
-    else:
-        day = datetime.now().day
-        month = datetime.now().month
-
-    year = datetime.now().year
     return render(
         request,
         "core/datatable.html",
-        {"converts": converts, "day": day, "month": month, "year": year},
+        {"converts": converts, "date_data" : date_to_owner},
     )
 
 

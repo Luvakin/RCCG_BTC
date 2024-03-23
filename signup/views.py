@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from core.models import Converts
+from datetime import datetime
 # Create your views here.
 
 def signup(request):
