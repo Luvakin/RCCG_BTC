@@ -54,13 +54,13 @@ def admin_login(request):
     return render(request, "core/admin_login.html", {})
 
 
-# @login_required
+@login_required
 def dashboard(request):
     print(request.user)
     return render(request, "core/dashboard.html", {})
 
 
-# @login_required
+@login_required
 def data_table(request):
     converts = Converts.objects.all()
     coppe = 0
@@ -88,7 +88,7 @@ def data_table(request):
     )
 
 
-# @login_required
+@login_required
 def profile(request):
     if request.method == "POST":
         username = request.POST["username"]
@@ -102,7 +102,7 @@ def profile(request):
     return render(request, "core/profile.html", {})
 
 
-# @login_required
+@login_required
 def change_password(request):
     if request.method == "POST":
         oldpassword = request.POST["oldpassword"]
@@ -117,12 +117,12 @@ def change_password(request):
     return render(request, "core/changepass.html", {})
 
 
-# @login_required
+@login_required
 def manageadmin(request):
     user = User.objects.filter(is_superuser=False)
     return render(request, "core/manageadmin.html", {"user": user})
 
-
+@login_required
 def delete(request):
     if len(Converts.objects.all()) != 0:
         Converts.objects.all().delete()
@@ -135,7 +135,7 @@ def logout(request):
     auth.logout(request)
     return HttpResponseRedirect(reverse("core:admin_login"))
 
-
+@login_required
 def export(request):
     response = HttpResponse(content_type="text/csv")
     writer = csv.writer(response)
